@@ -1,0 +1,38 @@
+<style type="text/css">
+  .new_message {
+      font-weight: bold;
+  }
+
+  .new_message {
+  }
+</style>
+
+<p id="notice"><%= notice %></p>
+
+<h1>Messages</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+    <% @messages.each do |message| %>
+      <tr class="<%= was_read?(message) %>">
+        <td>
+        <%= link_to message do %>
+          <%= message.title %>
+        <% end %>
+        </td>
+        <td><%= message.author.name %></td>
+        <td><%= link_to 'Archive', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+</table>
+
+<br>
+
+<%= link_to 'New Message', new_message_path %>

@@ -35,4 +35,10 @@ Rails.application.configure do
   config.assets.debug = true
   config.assets.quiet = true
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.alert = true
+    Bullet.add_footer = true
+  end
 end

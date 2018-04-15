@@ -19,8 +19,13 @@ ActiveRecord::Schema.define(version: 20180414184037) do
     t.text     "content"
     t.integer  "author_id"
     t.integer  "destinatary_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.string   "title"
+    t.boolean  "archived",       default: false
+    t.datetime "archive_date"
+    t.boolean  "read",           default: false
+    t.datetime "read_date"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.index ["author_id"], name: "index_messages_on_author_id", using: :btree
     t.index ["destinatary_id"], name: "index_messages_on_destinatary_id", using: :btree
   end

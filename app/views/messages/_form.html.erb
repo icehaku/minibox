@@ -12,18 +12,18 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
     <%= f.label :content %>
     <%= f.text_area :content %>
   </div>
 
   <div class="field">
-    <%= f.label :author_id %>
-    <%= f.text_field :author_id %>
-  </div>
-
-  <div class="field">
-    <%= f.label :destinatary_id %>
-    <%= f.text_field :destinatary_id %>
+    <%= f.label :destinatary_nickname %>
+    <%= f.text_field :destinatary_nickname %>
   </div>
 
   <div class="actions">

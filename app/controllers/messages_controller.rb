@@ -1,15 +1,17 @@
 class MessagesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_message, only: [:show, :destroy]
 
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.all
+    @messages = Message.current_user(current_user)
   end
 
   # GET /messages/1
   # GET /messages/1.json
   def show
+    @message.read_now
   end
 
   # GET /messages/new
@@ -20,11 +22,13 @@ class MessagesController < ApplicationController
   # POST /messages
   # POST /messages.json
   def create
-    @message = Message.new(message_params)
+    @message                      = Message.new(message_params)
+    @message.author               = current_user
+    @message.destinatary_nickname = params[:message][:destinatary_nickname]
 
     respond_to do |format|
       if @message.save
-        format.html { redirect_to @message, notice: 'Message was successfully created.' }
+        format.html { redirect_to messages_url, notice: 'Message was successfully created.' }
         format.json { render :show, status: :created, location: @message }
       else
         format.html { render :new }
@@ -50,7 +54,7 @@ class MessagesController < ApplicationController
   # DELETE /messages/1
   # DELETE /messages/1.json
   def destroy
-    @message.destroy
+    @message.archive_now
     respond_to do |format|
       format.html { redirect_to messages_url, notice: 'Message was successfully destroyed.' }
       format.json { head :no_content }
@@ -63,6 +67,6 @@ class MessagesController < ApplicationController
     end
 
     def message_params
-      params.require(:message).permit(:content, :author_id, :destinatary_id)
+      params.require(:message).permit(:title, :content, :author_id, :destinatary_id)
     end
 end

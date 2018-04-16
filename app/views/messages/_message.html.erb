@@ -1,0 +1,9 @@
+<tr class="<%= message.read ? 'normal_message' : 'new_message' %>">
+  <td>
+  <%= link_to message do %>
+    <%= message.title %>
+  <% end %>
+  </td>
+  <td><%= message.author.name %></td>
+  <td><%= link_to 'Archive', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>

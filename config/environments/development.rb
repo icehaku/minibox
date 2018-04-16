@@ -41,4 +41,6 @@ Rails.application.configure do
     Bullet.alert = true
     Bullet.add_footer = true
   end
+
+  config.action_cable.url = 'ws://localhost:3000/cable'
 end

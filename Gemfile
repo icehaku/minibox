@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'pg', '~> 0.19.0'
-gem 'devise' '~> 4.4.3'
+gem 'devise', '~> 4.4.3'
 
 gem 'rails', '~> 5.0.7'
 gem 'puma', '~> 3.0'
@@ -11,6 +11,10 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails', '~> 4.3.1'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
+
+group :production do
+  gem 'redis', '~> 3.0'
+end
 
 group :development, :test do
   gem 'byebug', platform: :mri

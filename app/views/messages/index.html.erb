@@ -20,8 +20,9 @@
     </tr>
   </thead>
 
+  <tbody class="messages">
     <% @messages.each do |message| %>
-      <tr class="<%= was_read?(message) %>">
+      <tr class="<%= was_read?(message) %> message" data-message-id="<%= message.id %>">
         <td>
         <%= link_to message do %>
           <%= message.title %>
@@ -31,6 +32,7 @@
         <td><%= link_to 'Archive', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
+  </tbody>
 </table>
 
 <br>

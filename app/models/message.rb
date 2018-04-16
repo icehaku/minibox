@@ -16,10 +16,12 @@ class Message < ApplicationRecord
   def read_now
     return if self.read
     self.update_attributes(read: true, read_date: DateTime.now)
+    ActionCable.server.broadcast 'messages', status: 'saved', id: id, html: render_message
   end
 
   def archive_now
     self.update_attributes(archived: true, archive_date: DateTime.now)
+    ActionCable.server.broadcast 'messages', status: 'deleted', id: id
   end
 
   def unarchive_now
@@ -35,4 +37,16 @@ class Message < ApplicationRecord
     where(destinatary: current_user, archived: true).order(
       'created_at desc').includes(:author)
   }
+
+
+
+#########################################
+
+
+  private
+  def render_message
+    ApplicationController.render(partial: 'messages/message', locals: { message: self })
+  end
+
+
 end

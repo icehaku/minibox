@@ -11,9 +11,11 @@
   </head>
 
   <body>
-    <%= "Logged: #{current_user.name}" if current_user %><br>
-    <%= link_to('Edit registration', edit_user_registration_path) %><br>
-    <%= link_to('Logout', destroy_user_session_path, method: :delete) %><br>
+    <% if current_user %>
+      <%= "Logged: #{current_user.name}" %> <br>
+      <%= link_to('Edit registration', edit_user_registration_path) %><br>
+      <%= link_to('Logout', destroy_user_session_path, method: :delete) %><br>
+    <% end %>
     <p class="alert"><%= alert %></p>
 
     <%= yield %>

@@ -17,5 +17,5 @@ development:
 production:
   adapter: postgresql
   encoding: unicode
-  database: happy_nel
+  database: minibox
   pool: 5

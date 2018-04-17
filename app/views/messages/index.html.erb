@@ -11,29 +11,30 @@
 
 <h1>Messages</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Author</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<%= form_tag '/message/mass_action', remote: true do %>
 
-  <tbody class="messages">
-    <% @messages.each do |message| %>
-      <tr class="<%= was_read?(message) %> message" data-message-id="<%= message.id %>">
-        <td>
-        <%= link_to message do %>
-          <%= message.title %>
-        <% end %>
-        </td>
-        <td><%= message.author.name %></td>
-        <td><%= link_to 'Archive', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Title</th>
+        <th>Author</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody class="messages">
+      <% @messages.each do |message| %>
+        <%= render(partial: 'message_line', locals: { message: message }) %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= submit_tag 'Mark as Read', data: { disable_with: 'Just a second...' } %>
+  <%= submit_tag 'Archive', data: { disable_with: 'Just a second...' }  %>
+<% end %>
+
+
 
 <br>
 

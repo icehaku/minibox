@@ -61,6 +61,23 @@ class MessagesController < ApplicationController
     end
   end
 
+  def mass_action
+    return unless params[:message_checkboxes].present?
+
+    params[:message_checkboxes].each do |message_id|
+      message = Message.find(message_id)
+
+      case params[:commit]
+      when "Mark as Read"
+        message.read_now
+      when "Archive"
+        message.archive_now
+      else
+        return
+      end
+    end
+  end
+
   private
     def set_message
       @message = Message.find(params[:id])

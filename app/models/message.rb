@@ -38,15 +38,9 @@ class Message < ApplicationRecord
       'created_at desc').includes(:author)
   }
 
-
-
-#########################################
-
-
   private
+
   def render_message
-    ApplicationController.render(partial: 'messages/message', locals: { message: self })
+    ApplicationController.render(partial: 'messages/message_line', locals: { message: self })
   end
-
-
 end

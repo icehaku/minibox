@@ -1,0 +1,14 @@
+<tr class="<%= was_read?(message) %> message"
+  data-message-id="<%= message.id %>">
+  <td><%= check_box_tag "message_checkboxes[]", message.id %></td>
+  <td>
+  <%= link_to message do %>
+    <%= message.title %>
+  <% end %>
+  </td>
+  <td><%= message.author.name %></td>
+  <td>
+    <%= link_to 'Archive', message, method: :delete,
+      data: { confirm: 'Are you sure?' } %>
+  </td>
+</tr>

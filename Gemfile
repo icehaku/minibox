@@ -3,7 +3,8 @@ ruby '2.3.1'
 
 gem 'pg', '~> 0.19.0'
 gem 'devise', '~> 4.4.3'
-gem 'redis'
+gem 'redis', '~> 3.0.0'
+gem 'font-awesome-rails', '~> 4.7.0.4'
 
 gem 'rails', '~> 5.0.7'
 gem 'puma', '~> 3.0'

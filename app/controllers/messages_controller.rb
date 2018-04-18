@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_message, only: [:show, :destroy, :make_important]
+  before_action :set_message, :is_owner, only: [:show, :destroy, :make_important]
   before_action :set_messages, only: [:index, :new, :show,
     :sent_box, :archived_box, :important_box]
 
@@ -53,7 +53,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
-        format.html { redirect_to messages_url, notice: 'Message was successfully created.' }
+        format.html { redirect_to messages_url }
         format.json { render :show, status: :created, location: @message }
       else
         format.html { render :new }
@@ -67,7 +67,7 @@ class MessagesController < ApplicationController
   def update
     respond_to do |format|
       if @message.update(message_params)
-        format.html { redirect_to @message, notice: 'Message was successfully updated.' }
+        format.html { redirect_to @message }
         format.json { render :show, status: :ok, location: @message }
       else
         format.html { render :edit }
@@ -81,7 +81,7 @@ class MessagesController < ApplicationController
   def destroy
     @message.archive_now
     respond_to do |format|
-      format.html { redirect_to messages_url, notice: 'Message was successfully destroyed.' }
+      format.html { redirect_to messages_url }
       format.json { head :no_content }
     end
   end
@@ -93,9 +93,9 @@ class MessagesController < ApplicationController
       message = Message.find(message_id)
 
       case params[:commit]
-      when "Mark as Read"
+      when t('message.view.message_list.button.mark_read')
         message.read_now
-      when "Archive"
+      when t('message.view.message_list.button.archive')
         message.archive_now
       else
         return
@@ -114,5 +114,10 @@ class MessagesController < ApplicationController
 
     def message_params
       params.require(:message).permit(:title, :content, :author_id, :destinatary_id)
+    end
+
+    def is_owner
+      redirect_to messages_path unless current_user == @message.destinatary or
+        current_user == @message.author
     end
 end

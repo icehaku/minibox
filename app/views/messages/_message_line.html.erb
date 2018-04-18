@@ -1,7 +1,8 @@
 <tr class="<%= is_read_class(message) %> message"
   data-message-id="<%= message.id %>">
   <td class="inbox-small-cells">
-    <%= check_box_tag "message_checkboxes[]", message.id %>
+    <%= check_box_tag "message_checkboxes[]", message.id,
+      false, data: { checkbox_item: true } %>
   </td>
   <td class="inbox-small-cells">
     <%= is_read_icon(message) %>

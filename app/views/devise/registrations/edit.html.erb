@@ -1,4 +1,7 @@
-<h2 class="devise-title">Edit <%= resource_name.to_s.humanize %></h2>
+<h2 class="devise-title">
+  <%= t('devise.registrations.edit.title') %>
+  <%= resource_name.to_s.humanize %>
+</h2>
 
 <%= form_for(resource, as: resource_name,
   url: registration_path(resource_name), html: { method: :put }) do |f| %>
@@ -21,10 +24,11 @@
   </div>
 
   <div class="field">
-    <%= f.label :password, class: "minibox_label" %> <br>
+    <%= f.label :password, class: "minibox_label" %><br>
     <i>
-      (leave blank if you don't want to change it) <br>
-      <%= @minimum_password_length %> characters minimum
+      (<%= t('devise.registrations.edit.text.leave_blank') %>)<br>
+      <%= @minimum_password_length %>
+      <%= t('devise.registrations.edit.text.char_minimun') %>
     </i><br>
   </div>
 
@@ -36,23 +40,23 @@
 
   <div class="field">
     <%= f.label :current_password, class: "minibox_label" %><br>
-    <i>(we need your current password to confirm your changes)</i><br>
+    <i>(<%= t('devise.registrations.edit.text.password_need') %>)</i><br>
     <%= f.password_field :current_password, autocomplete: "off",
       class: "minibox_input" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Update", class: "flat-button base-purple" %>
+    <%= f.submit t('devise.registrations.edit.button.submit'),
+      class: "flat-button base-purple" %>
   </div>
 <% end %>
 
 <br>
 
-<%= button_to "Return to Inbox", messages_path,
+<%= button_to t('devise.registrations.edit.button.return_inbox'), messages_path,
   class: "flat-button return-inbox", method: :get %>
 
 <br>
 
-<%= button_to "Cancel my account", registration_path(resource_name),
-  data: { confirm: "Are you totally sure you want delete your account forever?" },
+<%= button_to t('devise.registrations.edit.button.cancel_account'), registration_path(resource_name), data: { confirm: t('devise.registrations.edit.text.pop_confirm') },
     method: :delete, class: "flat-button cancel-account" %>

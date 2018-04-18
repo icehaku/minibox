@@ -10,7 +10,9 @@
     <%= action_cable_meta_tag %>
   </head>
 
-  <h1 align="center" class="base-title">Minibox</h1>
+  <h1 align="center" class="base-title">
+    <%= t('application_layout.title.main') %>
+  </h1>
 
   <body>
     <div class="container">
@@ -27,7 +29,9 @@
           </div>
 
           <div class="inbox-body">
-            <%= link_to "Compose", new_message_path, title: "Compose", class: "btn btn-compose" %>
+            <%= link_to t('application_layout.button.compose'),
+              new_message_path, title: t('application_layout.title.compose'),
+                class: "btn btn-compose" %>
           </div>
 
           <ul class="inbox-nav inbox-divider">
@@ -40,22 +44,25 @@
 
             <li>
               <%= link_to message_sent_box_path,
-                title: "Sent Mails" do %>
-                <i class="fa fa-envelope-o"></i>Sent Mail
+                title: t('application_layout.title.sent') do %>
+                <i class="fa fa-envelope-o"></i>
+                <%= t('application_layout.tabs.sent') %>
               <% end %>
             </li>
 
             <li>
               <%= link_to message_important_box_path,
-                title: "Sent Mails" do %>
-                <i class="fa fa-star-o"></i>Important
+                title: t('application_layout.title.important') do %>
+                <i class="fa fa-star-o"></i>
+                <%= t('application_layout.tabs.important') %>
               <% end %>
             </li>
 
             <li>
               <%= link_to message_archived_box_path,
-                title: "Sent Mails" do %>
-                <i class="fa fa-trash-o"></i>Archived
+                title: t('application_layout.title.archived') do %>
+                <i class="fa fa-trash-o"></i>
+                <%= t('application_layout.tabs.archived') %>
               <% end %>
             </li>
           </ul>
@@ -63,15 +70,15 @@
           <div class="inbox-body text-center">
             <div class="btn-group">
               <%= link_to edit_user_registration_path, class: "btn mini btn-info",
-                title: "Edit Registration" do %>
+                title: t('application_layout.button.edit_user') do %>
                 <i class="fa fa-cog"></i>
               <% end %>
             </div>
 
             <div class="btn-group">
               <%= link_to destroy_user_session_path, class: "btn mini btn-danger",
-                title: "Logout", method: :delete do %>
-                <i class="fa fa-remove"></i>
+                title: t('application_layout.button.logout'), method: :delete do %>
+                <i class="fa fa-sign-out"></i>
               <% end %>
             </div>
           </div>
@@ -82,7 +89,8 @@
             <h3><%= @page_title %></h3>
             <form action="#" class="pull-right position">
               <div class="input-append">
-                <input type="text" class="sr-input" placeholder="Search Mail #to do">
+                <input type="text" class="sr-input"
+                  placeholder="<%= t('application_layout.search_placeholder') %>">
                 <button class="btn sr-btn" type="button"><i class="fa fa-search"></i></button>
               </div>
             </form>

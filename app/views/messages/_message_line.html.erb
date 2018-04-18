@@ -14,17 +14,19 @@
       <%= message.title %>
     <% end %>
   </td>
-  <td class="view-message  text-right">
-    <%= message.created_at.strftime("%d/%m/%Y at %I:%M%p") %></td>
+  <td class="view-message text-right">
+    <%= message.created_at.strftime("%d/%m/%Y at %I:%M %p") %></td>
   <td>
     <%= link_to message, method: :delete,
-      class: "btn btn-danger btn-xs", title: "Archive Message",
-        data: { confirm: 'Are you sure?' } do %>
-      <span class="glyphicon glyphicon-fire"></span>
+      class: "btn btn-danger btn-xs",
+      title: t('message.view.message_line.archive_title'),
+      data: { confirm: t('message.view.message_line.archive_confirm') } do %>
+      <span class="glyphicon glyphicon-remove"></span>
     <% end %>
 
     <%= link_to message_make_important_path(message), remote: true,
-    class: "btn btn-warning btn-xs", title: "Mark Important" do %>
+      class: "btn btn-warning btn-xs",
+      title: t('message.view.message_line.important_title') do %>
       <span class="glyphicon glyphicon-star"></span>
     <% end %>
   </td>

@@ -1,4 +1,4 @@
-<h2 class="devise-title">Log in</h2>
+<h2 class="devise-title"><%= t('devise.sessions.new.title') %></h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
@@ -14,7 +14,8 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Log in", class: "flat-button base-purple" %>
+    <%= f.submit t('devise.sessions.new.button'),
+      class: "flat-button base-purple" %>
   </div>
 <% end %>
 

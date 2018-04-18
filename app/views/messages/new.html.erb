@@ -1,5 +1,43 @@
-<h1>New Message</h1>
+<%= form_for(@message) do |f| %>
+  <% if @message.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
 
-<%= render 'form', message: @message %>
+      <ul>
+      <% @message.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<%= link_to 'Back', messages_path %>
+  <div class="form-group">
+    <%= f.label :title, class: "col-lg-2 control-label" %>
+    <div class="col-lg-10">
+      <%= f.text_field :title, class: "form-control", placeholder: "Title of Message..." %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :destinatary_nickname, "To",
+      class: "col-lg-2 control-label" %>
+    <div class="col-lg-10">
+      <%= f.text_field :destinatary_nickname, class: "form-control",
+      placeholder: "Destinatary Nickname or you can also send to yourself..." %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :content, class: "col-lg-2 control-label" %>
+    <div class="col-lg-10">
+      <%= f.text_area :content, rows: "10", cols: "30", class: "form-control",
+      placeholder: "Say what you wanna say..." %>
+    </div>
+  </div>
+
+  <div class="form-group">
+      <div class="col-lg-offset-2 col-lg-10">
+        <%= f.submit "Send", class: "btn btn-send" %>
+      </div>
+  </div>
+<% end %>

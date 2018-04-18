@@ -1,8 +1,6 @@
-<p id="notice"><%= notice %></p>
-
 <p>
-  <strong>Content:</strong>
-  <%= @message.content %>
+  <strong>Title:</strong>
+  <%= @message.title %>
 </p>
 
 <p>
@@ -15,4 +13,7 @@
   <%= @message.destinatary.name %>
 </p>
 
-<%= link_to 'Back', messages_path %>
+<p>
+  <strong>Content:</strong>
+  <%= @message.content %>
+</p>

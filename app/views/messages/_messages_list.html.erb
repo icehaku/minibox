@@ -1,0 +1,27 @@
+<%= form_tag '/message/mass_action', remote: true do %>
+  <div class="mail-option">
+    <div class="chk-all">
+      <input type="checkbox" class="mail-checkbox mail-group-checkbox">
+      <div class="btn-group">
+        <a data-toggle="dropdown" href="#" class="btn mini all" aria-expanded="false">
+          All <i class="fa fa-angle-down "></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="btn-group">
+      <%= submit_tag 'Mark as Read', class: "btn btn-success",
+        data: { disable_with: 'Just a second...' } %>
+      <%= submit_tag 'Archive', class: "btn btn-danger",
+        data: { disable_with: 'Just a second...' }  %>
+    </div>
+  </div>
+
+  <table class="table table-inbox table-hover">
+    <tbody class="messages">
+      <% @messages.each do |message| %>
+        <%= render partial: 'message_line', locals: { message: message } %>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

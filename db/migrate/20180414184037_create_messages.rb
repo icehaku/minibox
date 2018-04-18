@@ -9,6 +9,7 @@ class CreateMessages < ActiveRecord::Migration[5.0]
       t.datetime   :archive_date
       t.boolean    :read, default: false
       t.datetime   :read_date
+      t.boolean    :important, default: false
       t.timestamps
     end
 

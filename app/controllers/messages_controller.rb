@@ -17,17 +17,17 @@ class MessagesController < ApplicationController
   end
 
   def sent_box
-    @page_title = "Sent Messages"
+    @page_title = t('application_layout.title.sent')
     @messages = Message.current_user_sent(current_user)
   end
 
   def important_box
-    @page_title = "Important Messages"
+    @page_title = t('application_layout.title.important')
     @messages = Message.current_user_important(current_user)
   end
 
   def archived_box
-    @page_title = "Archived Messages"
+    @page_title = t('application_layout.title.archived')
     @messages = Message.current_user_archived(current_user)
   end
 
@@ -40,7 +40,7 @@ class MessagesController < ApplicationController
 
   # GET /messages/new
   def new
-    @page_title = "New Message"
+    @page_title = t('application_layout.title.new_message')
     @message = Message.new
   end
 

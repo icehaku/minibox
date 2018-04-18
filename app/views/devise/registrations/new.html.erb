@@ -1,6 +1,9 @@
-<h2 class="devise-title">Sign up</h2>
+<h2 class="devise-title">
+  <%= t('devise.registrations.new.title') %>
+</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name,
+  url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
   <div class="field">
@@ -23,7 +26,10 @@
     <%= f.label :password, class: "minibox_label" %><br>
     <%= f.password_field :password, autocomplete: "off",
       class: "minibox_input" %><br>
-    <i><%= @minimum_password_length %> characters minimum</i>
+    <i>
+      <%= @minimum_password_length %>
+      <%= t('devise.registrations.new.text.char_minimun') %>
+    </i>
   </div>
 
   <div class="field">
@@ -35,7 +41,8 @@
   <br>
 
   <div class="actions">
-    <%= f.submit "Sign up", class: "flat-button return-inbox" %>
+    <%= f.submit t('devise.registrations.new.button'),
+      class: "flat-button return-inbox" %>
   </div>
 <% end %>
 

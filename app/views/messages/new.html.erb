@@ -1,7 +1,10 @@
 <%= form_for(@message) do |f| %>
   <% if @message.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
+      <h2>
+      <%= pluralize(@message.errors.count, "error") %>
+      <%= t('message.view.new.model_error') %>
+      </h2>
 
       <ul>
       <% @message.errors.full_messages.each do |message| %>
@@ -14,7 +17,8 @@
   <div class="form-group">
     <%= f.label :title, class: "col-lg-2 control-label" %>
     <div class="col-lg-10">
-      <%= f.text_field :title, class: "form-control", placeholder: "Title of Message..." %>
+      <%= f.text_field :title, class: "form-control",
+        placeholder: t('message.view.new.title_placeholder') %>
     </div>
   </div>
 
@@ -23,7 +27,7 @@
       class: "col-lg-2 control-label" %>
     <div class="col-lg-10">
       <%= f.text_field :destinatary_nickname, class: "form-control",
-      placeholder: "Destinatary Nickname or you can also send to yourself..." %>
+        placeholder: t('message.view.new.destiny_placeholder') %>
     </div>
   </div>
 
@@ -31,13 +35,13 @@
     <%= f.label :content, class: "col-lg-2 control-label" %>
     <div class="col-lg-10">
       <%= f.text_area :content, rows: "10", cols: "30", class: "form-control",
-      placeholder: "Say what you wanna say..." %>
+        placeholder: t('message.view.new.content_placeholder') %>
     </div>
   </div>
 
   <div class="form-group">
       <div class="col-lg-offset-2 col-lg-10">
-        <%= f.submit "Send", class: "btn btn-send" %>
+        <%= f.submit t('message.view.new.button'), class: "btn btn-send" %>
       </div>
   </div>
 <% end %>

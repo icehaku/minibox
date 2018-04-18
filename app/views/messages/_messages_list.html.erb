@@ -1,4 +1,4 @@
-<%= form_tag '/message/mass_action', remote: true do %>
+<%= form_tag mass_action_path, remote: true do %>
   <div class="mail-option">
     <div class="chk-all">
       <input type="checkbox" class="mail-checkbox mail-group-checkbox">
@@ -10,10 +10,12 @@
     </div>
 
     <div class="btn-group">
-      <%= submit_tag 'Mark as Read', class: "btn btn-success",
-        data: { disable_with: 'Just a second...' } %>
-      <%= submit_tag 'Archive', class: "btn btn-danger",
-        data: { disable_with: 'Just a second...' }  %>
+      <%= submit_tag t('message.view.message_list.button.archive'),
+        class: "btn btn-success",
+        data: { disable_with: t('message.view.message_list.button.disabled_with') } %>
+      <%= submit_tag t('message.view.message_list.button.mark_read'),
+        class: "btn btn-danger",
+        data: { disable_with: t('message.view.message_list.button.disabled_with') }  %>
     </div>
   </div>
 

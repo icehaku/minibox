@@ -4,7 +4,7 @@ class Message < ApplicationRecord
 
   attr_accessor :destinatary_nickname
 
-  validates_presence_of :content
+  validates_presence_of :title, :content
   validate :destinatary_exist?, on: :create
 
   def destinatary_exist?
@@ -16,7 +16,14 @@ class Message < ApplicationRecord
   def read_now
     return if self.read
     self.update_attributes(read: true, read_date: DateTime.now)
-    ActionCable.server.broadcast 'messages', status: 'saved', id: id, html: render_message
+    ActionCable.server.broadcast 'messages',
+      status: 'saved', id: id, html: render_message
+  end
+
+  def important_now
+    self.toggle(:important).save
+    ActionCable.server.broadcast 'messages',
+      status: 'saved', id: id, html: render_message
   end
 
   def archive_now
@@ -28,7 +35,7 @@ class Message < ApplicationRecord
     self.update_attributes(archived: false, archive_date: nil)
   end
 
-  scope :current_user, lambda { |current_user|
+  scope :current_user_inbox, lambda { |current_user|
     where(destinatary: current_user, archived: false).order(
       'created_at desc').includes(:author)
   }
@@ -38,9 +45,24 @@ class Message < ApplicationRecord
       'created_at desc').includes(:author)
   }
 
+  scope :current_user_sent, lambda { |current_user|
+    where(author: current_user).order(
+      'created_at desc').includes(:destinatary)
+  }
+
+  scope :current_user_important, lambda { |current_user|
+    where(author: current_user, important: true).order(
+      'created_at desc').includes(:author)
+  }
+
+  scope :current_user_unread, lambda { |current_user|
+    where(destinatary: current_user, read: false, archived: false)
+  }
+
   private
 
   def render_message
-    ApplicationController.render(partial: 'messages/message_line', locals: { message: self })
+    ApplicationController.render(partial: 'messages/message_line',
+      locals: { message: self })
   end
 end

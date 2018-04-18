@@ -1,0 +1,17 @@
+<table class="table table-inbox table-hover">
+  <tbody class="messages">
+    <% @messages.each do |message| %>
+      <tr>
+        <td><%= message.destinatary.name %></td>
+        <td>
+          <%= link_to message do %>
+            <%= message.title %>
+          <% end %>
+        </td>
+        <td class="view-message  text-right">
+          <%= message.created_at.strftime("%d/%m/%Y at %I:%M%p") %></td>
+        <td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

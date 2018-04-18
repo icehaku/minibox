@@ -1,21 +1,46 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_message, only: [:show, :destroy]
+  before_action :set_message, only: [:show, :destroy, :make_important]
+  before_action :set_messages, only: [:index, :new, :show,
+    :sent_box, :archived_box, :important_box]
 
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.current_user(current_user)
+    @page_title = "Inbox"
+    @messages = Message.current_user_inbox(current_user)
+  end
+
+  def make_important
+    @message.important_now
+    redirect_to messages_url
+  end
+
+  def sent_box
+    @page_title = "Sent Messages"
+    @messages = Message.current_user_sent(current_user)
+  end
+
+  def important_box
+    @page_title = "Important Messages"
+    @messages = Message.current_user_important(current_user)
+  end
+
+  def archived_box
+    @page_title = "Archived Messages"
+    @messages = Message.current_user_archived(current_user)
   end
 
   # GET /messages/1
   # GET /messages/1.json
   def show
-    @message.read_now
+    @page_title = "Reading Message: #{@message.title}"
+    @message.read_now if current_user == @message.destinatary
   end
 
   # GET /messages/new
   def new
+    @page_title = "New Message"
     @message = Message.new
   end
 
@@ -81,6 +106,10 @@ class MessagesController < ApplicationController
   private
     def set_message
       @message = Message.find(params[:id])
+    end
+
+    def set_messages
+      @messages_unread = Message.current_user_unread(current_user)
     end
 
     def message_params

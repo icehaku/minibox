@@ -1,14 +1,32 @@
-<tr class="<%= was_read?(message) %> message"
+<tr class="<%= is_read_class(message) %> message"
   data-message-id="<%= message.id %>">
-  <td><%= check_box_tag "message_checkboxes[]", message.id %></td>
-  <td>
-  <%= link_to message do %>
-    <%= message.title %>
-  <% end %>
+  <td class="inbox-small-cells">
+    <%= check_box_tag "message_checkboxes[]", message.id %>
   </td>
+  <td class="inbox-small-cells">
+    <%= is_read_icon(message) %>
+    <%= is_important_icon(message) %>
+  </td>
+  <td>
   <td><%= message.author.name %></td>
   <td>
-    <%= link_to 'Archive', message, method: :delete,
-      data: { confirm: 'Are you sure?' } %>
+    <%= link_to message do %>
+      <%= message.title %>
+    <% end %>
+  </td>
+  <td class="view-message  text-right">
+    <%= message.created_at.strftime("%d/%m/%Y at %I:%M%p") %></td>
+  <td>
+    <%= link_to message, method: :delete,
+      class: "btn btn-danger btn-xs", title: "Archive Message",
+        data: { confirm: 'Are you sure?' } do %>
+      <span class="glyphicon glyphicon-fire"></span>
+    <% end %>
+
+    <%= link_to message_make_important_path(message), remote: true,
+    class: "btn btn-warning btn-xs", title: "Mark Important" do %>
+      <span class="glyphicon glyphicon-star"></span>
+    <% end %>
   </td>
 </tr>
+

@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   resources :messages
 
+  mount API::Base, at: "/"
+  mount GrapeSwaggerRails::Engine, at: "/documentation"
+
   get "message/important", to: "messages#important_box", as: "message_important_box"
   get "message/sent", to: "messages#sent_box", as: "message_sent_box"
   get "message/archived", to: "messages#archived_box", as: "message_archived_box"

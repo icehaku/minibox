@@ -33,6 +33,17 @@ rake db:migrate
 rake db:create RAILS_ENV=test #test suite
 rspec ./spec #test suite
 ```
+
+# API Calls
+
+* /api/v1/users/
+
+* /api/v1/users/:id
+
+* /api/v1/messages/
+
+* /api/v1/messages/:id
+
 # Hosted Project on Heroku
 
 https://agenda-minibox.herokuapp.com/

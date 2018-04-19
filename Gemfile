@@ -14,6 +14,11 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails', '~> 4.3.1'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
+gem 'grape'
+gem 'grape-swagger'
+gem 'grape-swagger-rails'
+gem 'grape-active_model_serializers'
+gem 'rack-cors', :require => 'rack/cors'
 
 group :development, :test do
   gem 'byebug', '~> 10.0.0'

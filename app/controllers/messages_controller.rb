@@ -4,10 +4,8 @@ class MessagesController < ApplicationController
   before_action :set_messages, only: [:index, :new, :show,
     :sent_box, :archived_box, :important_box]
 
-  # GET /messages
-  # GET /messages.json
   def index
-    @page_title = "Inbox"
+    @page_title = t('application_layout.title.inbox')
     @messages = Message.current_user_inbox(current_user)
   end
 
@@ -31,21 +29,16 @@ class MessagesController < ApplicationController
     @messages = Message.current_user_archived(current_user)
   end
 
-  # GET /messages/1
-  # GET /messages/1.json
   def show
     @page_title = "Reading Message: #{@message.title}"
     @message.read_now if current_user == @message.destinatary
   end
 
-  # GET /messages/new
   def new
     @page_title = t('application_layout.title.new_message')
     @message = Message.new
   end
 
-  # POST /messages
-  # POST /messages.json
   def create
     @message                      = Message.new(message_params)
     @message.author               = current_user
@@ -62,22 +55,6 @@ class MessagesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /messages/1
-  # PATCH/PUT /messages/1.json
-  def update
-    respond_to do |format|
-      if @message.update(message_params)
-        format.html { redirect_to @message }
-        format.json { render :show, status: :ok, location: @message }
-      else
-        format.html { render :edit }
-        format.json { render json: @message.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /messages/1
-  # DELETE /messages/1.json
   def destroy
     @message.archive_now
     respond_to do |format|

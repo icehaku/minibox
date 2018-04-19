@@ -74,6 +74,7 @@ en:
       sent: "Sent Messages"
       important: "Important Messages"
       archived: "Archived Messages"
+      inbox: "Inbox"
     button:
       compose: "Compose"
       edit_user: "Edir User"

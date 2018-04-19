@@ -51,8 +51,8 @@ class Message < ApplicationRecord
   }
 
   scope :current_user_important, lambda { |current_user|
-    where(author: current_user, important: true).order(
-      'created_at desc').includes(:author)
+    where(destinatary: current_user, important: true).order(
+      'created_at desc')
   }
 
   scope :current_user_unread, lambda { |current_user|

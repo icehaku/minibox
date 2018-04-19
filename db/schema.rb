@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20180414184037) do
     t.datetime "archive_date"
     t.boolean  "read",           default: false
     t.datetime "read_date"
+    t.boolean  "important",      default: false
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.index ["author_id"], name: "index_messages_on_author_id", using: :btree

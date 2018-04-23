@@ -5,6 +5,7 @@ test:
   pool: 5
   username: ice
   password: "ice123"
+  host: localhost
 
 development:
   adapter: postgresql
@@ -13,6 +14,7 @@ development:
   pool: 5
   username: ice
   password: "ice123"
+  host: localhost
 
 production:
   adapter: postgresql
